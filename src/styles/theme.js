@@ -13,11 +13,17 @@ const themes = StyleSheet.create({
     light__red: {
         color: '#ff4545',
     },
+    light__gray__0: {
+        color: '#ededed',
+    },
     light__gray: {
         color: '#ababab',
     },
     light__gray__1: {
         color: '#d6d6d6',
+    },
+    light__gray__15: {
+        color: '#7a7a7a'
     },
     light__gray__2: {
         color: '#4a4a4a',

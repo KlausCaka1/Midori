@@ -4,9 +4,11 @@ import Carousel from 'react-native-snap-carousel';
 import Themes from '../styles/theme';
 import Check from 'react-native-vector-icons/Feather';
 import Pin from 'react-native-vector-icons/Entypo';
+import Arrow from 'react-native-vector-icons/MaterialIcons';
 import Group from 'react-native-vector-icons/FontAwesome';
 import Watch from 'react-native-vector-icons/Fontisto';
 import Menu from 'react-native-vector-icons/AntDesign';
+import Event from './eventsComponents/eventComponent';
 
 const images = [
     'https://unsplash.it/300/?random',
@@ -20,10 +22,20 @@ const images = [
 
 export default class EventsScreen extends Component {
 
+    goBack() {
+        this.props.navigation.navigate('Posts_details');
+    }
+
     renderItem = ({item}) => {
         return (
                 <Image style={styles.card__media__img} source={{ uri: item}} />
             );
+    }
+
+    renderEvents = ({event}) => {
+        return (
+            <Event  />
+        );
     }
 
     render() {
@@ -31,6 +43,9 @@ export default class EventsScreen extends Component {
             <ScrollView style={{flex: 1}}>
                 <View style={styles.container}>
                     <View style={styles.header}>
+                        <TouchableOpacity onPress={() => this.goBack()}>
+                            <Arrow name="arrow-back" size={20} />
+                        </TouchableOpacity>
                         <Text style={styles.header__title}>midori</Text>
                         <Pin name="dots-three-vertical" size={20} style={styles.header__icon} />
                     </View>
@@ -105,22 +120,20 @@ export default class EventsScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingHorizontal: 15,
+        paddingTop: 8,
     },
     header: {
         marginTop: 20,
         marginBottom: 5,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
     },
     header__title: {
         color: Themes.light__green.color,
         fontSize: 30,
-    },
-    header__icon: {
-        position: 'absolute',
-        right: 15,
     },
     title: {
         marginHorizontal: 20,

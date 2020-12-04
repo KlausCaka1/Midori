@@ -4,9 +4,11 @@ import Themes from '../styles/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { navigationRef } from '../utils/navigation';
+import Dots from 'react-native-vector-icons/Entypo';
 
 import Challenges from './profileScreens/ChallengesProfile';
 import Posts from './profileScreens/PostProfile';
+import FloatingActionButtons from '../commonComponents/FloatingActionButtons';
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -23,7 +25,7 @@ function Tab() {
                     fontFamily: 'Lucida Console,Lucida Sans Typewriter,monaco,Bitstream Vera Sans Mono,monospace',
                     backgroundColor: Themes.light__gray__1.color,
                     textTransform: 'capitalize'},
-                tabStyle: { borderColor: 'black', },
+                tabStyle: { borderColor: 'black' },
                 style: { backgroundColor: Themes.background.color, elevation: 0, justifyContent: 'center'}
             }}>
                 <TopTab.Screen name="Challanges" component={Challenges}  />
@@ -35,15 +37,23 @@ function Tab() {
 
 export default class Profile extends Component {
 
+    logout() {
+        this.props.navigation.navigate('Auth');
+    }
+
     createChallenges() {
         this.props.navigation.navigate('Create');
     }
 
     render() {
+        const { navigation } = this.props;
+
         return (
             <ScrollView  style={styles.mainContainer}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>midori</Text>
+                    <View style={styles.header}>
+                        <Text style={styles.title}>midori</Text>
+                    </View>
                 <View style={styles.container__bio}>
                     <View style={{flex: 1, justifyContent: 'center'}}>
                         <Image style={styles.container__bio__photo}
@@ -101,6 +111,7 @@ export default class Profile extends Component {
                 <View style={styles.navigation}>
                     <Tab />
                 </View>
+                <FloatingActionButtons style={{ right: 18, top:  8}} navigation={navigation} />
             </ScrollView>
         );
     }
@@ -111,16 +122,28 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     container: {
-        flex: 5,
+        flex: 1,
         justifyContent: 'center',
+        padding: 15,
+    },
+    header: {
+        flexDirection: 'row',
         alignItems: 'center',
-        padding: 20,
+        justifyContent: 'center',
+        marginTop: 10,
+        marginBottom: 15,
+    },
+    dotsButtons: {
+        display: 'flex',
+        alignItems: 'center',
+        position: 'absolute',
+        width: 100,
     },
     title: {
         textAlign: 'center',
         fontSize: 30,
         color: Themes.light__green.color,
-        marginBottom: 20,
+        marginBottom: 5,
     },
     container__bio: {
         display: 'flex',

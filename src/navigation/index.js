@@ -11,9 +11,12 @@ import PostIcon from 'react-native-vector-icons/Feather';
 import Auth from '../container/AuthScreen';
 import Profile from '../container/Profile';
 import Events from '../container/EventsScreen';
-import Posts from '../container/PostsScreen';
+import Posts from '../container/posts/PostsScreen';
 import CreateChallenges from '../container/profileScreens/CreateChallenges';
 import Location from '../container/profileScreens/Location';
+import PostDetails from '../container/posts/PostDetails';
+import PostsOnPosts from '../container/posts/PostsOnPosts';
+import PostComments from '../container/posts/PostComments';
 import { navigationRef } from '../utils/navigation';
 
 const Stack = createStackNavigator();
@@ -37,17 +40,30 @@ function ProfileScreens() {
   );
 }
 
+function PostScreens() {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Main_Post" component={Posts} />
+      <Stack.Screen name="Posts_details" component={PostDetails} />
+      <Stack.Screen name="Posts_posts" component={PostsOnPosts} />
+      <Stack.Screen name="Post_comments" component={PostComments} />
+    </Stack.Navigator>
+  )
+}
+
 
 
 function Tabs() {
   return (
-  <TabNav.Navigator style={{fontSize: 20}}>
+  <TabNav.Navigator
+  style={{fontSize: 20}}
+  initialRouteName="Profile">
     <TabNav.Screen name="Event" component={Events} options={{
       tabBarIcon: ({color}) => (
         <EventIcon name="location-pin" size={20} />
       ),
     }} />
-    <TabNav.Screen name="Posts" component={Posts} options={{
+    <TabNav.Screen name="Posts" component={PostScreens} options={{
       tabBarIcon: ({color}) => (
         <PostIcon name="list" size={20} />
       ),
